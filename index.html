@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="INSPIRO" />    
+	<meta name="description" content="Themeforest Template Polo">
+    <link rel="icon" type="image/png" href="images/favicon.png">   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Document title -->
+<title>Calendario</title>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Full Calendar files -->
+<link href='css/fullcalendar.min.css' rel='stylesheet' />
+<!-- Stylesheets & Fonts -->
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body id="body">
+    <div class="body-inner">
+        <!-- Header -->
+        <header id="header" data-fullwidth="true" class="dark">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo"> <a href="index.html"><span class="logo-default">Google Calendar</span><span class="logo-dark">Google Calendar</span></a> </div>
+                    <!--End: Logo-->
+                    <div id="mainMenu">
+                        <div class="container">
+                            <nav class="navbar navbar-light bg-light justify-content-between">
+                                <form class="form-inline nomargin">
+                                    <button class="btn btn-outline" type="button" id="authorize_button" style="display: none;">Autorizar</button>
+                                    <button class="btn btn-outline" type="button" id="signout_button" >Salir</button>
+                                </form>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- end: Header -->
+        <!-- Page Content -->
+        <section id="page-content" class="no-sidebar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+                <!-- end: Calendar -->
+            </div>
+        </section>
+        <!-- Modal -->
+        <div class="modal fade" id="modalEvents" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Agregar Evento</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <div class="col-md-12">
+                                    <input type="hidden" name="id" class="form-control" id="id">
+                                    <label for="title" class="control-label">Titulo</label>
+                                    <input type="text" name="title" class="form-control" id="title" placeholder="Titulo">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="col-md-12">
+                                    <label for="descripcion" class="control-label">Descripción</label>
+                                    <input type="text" name="descripcion" class="form-control" id="descripcion" placeholder="Descripción">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <div class="col-md-12">
+                                    <label for="color" class="control-label">Color</label>
+                                    <select name="color" class="form-control color" id="color">
+                                        <option value="">Seleccionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="col-md-12">
+                                    <label for="direccion" class="control-label">Dirección</label>
+                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Dirección">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <label for="start" class="control-label">Inicio</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <input type="date" name="start" class="form-control" id="start">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="time" name="hrastart" class="form-control" id="hrastart">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <label for="end" class="control-label">Fin</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <input type="date" name="end" class="form-control" id="end">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="time" name="hraend" class="form-control" id="hraend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" id="btnCerrar">Cerrar</button>
+                        <button type="submit" class="btn btn-success" id="btnGuardar" onclick="insertEvent()">Guardar</button>
+                        <button type="submit" class="btn btn-primary" id="btnActualizar" onclick="updateEvent()">Actualizar</button>
+                        <button type="submit" class="btn btn-danger" id="btnEliminar" onclick="deleteEvent()">Eliminar</button>
+                    </div>
+            </div>
+          </div>
+        </div>
+        <!-- end: Page Content -->
+        <!-- Footer -->
+        <footer id="footer">
+        </footer>
+        <!-- end: Footer -->
+    </div> <!-- end: Body Inner -->
+    <!-- Scroll top -->
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+    <!--Plugins-->
+    <script src="js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src='js/moment.min.js'></script>
+    <script src='js/moment-timezone.js'></script>
+    <script src='js/fullcalendar.min.js'></script>
+    <script src='js/gcal.min.js'></script>
+    <script src='js/locale/es.js'></script>
+    <script src='js/funciones.js'></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</body>
+</html>
